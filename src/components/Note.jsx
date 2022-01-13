@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 
@@ -11,7 +11,8 @@ function Note(props) {
 
   // Animate note on creation
   // only runs on first render
-  useEffect(() => {
+  // useLayoutEffect to avoiding flash of unstyled content
+  useLayoutEffect(() => {
         tlCreation.current = gsap.timeline()
         .from(noteRef.current,{width:0, padding:0, margin:0})
         .from(noteRef.current, { scale: 0 }, "-=0.15");
