@@ -11,11 +11,10 @@ function App() {
 
   // Add a note to notes array
   function addNote(note) {
-
-
       // Update "notes" array
     setNotes(function (oldNotes) {
-      return [...notes, note];
+      // Using spread operator to return a new array containing oldNotes and the new note
+      return [...oldNotes, note];
     });
   }
 
@@ -23,10 +22,12 @@ function App() {
   function deleteNote(id) {
       // Update "notes" array
     setNotes(function (oldNotes) {
+      // Using filter to return a new array where the requested note is removed based on his index.
       return oldNotes.filter((_, index) => index !== id);
     });
   }
 
+  // Create a new Note components array from notes array.
   const listItems = notes.map((item, index) => (
     <Note
       key={index}
@@ -37,8 +38,6 @@ function App() {
       onDelete={deleteNote}
     />
   ));
-
-
 
 
 // If notes array is not empty render all the notes else render default example note
