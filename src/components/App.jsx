@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -8,6 +9,10 @@ import AddNoteForm from "./AddNoteForm";
 function App() {
     // State variable called "notes" to store all notes created by the user.
   const [notes, setNotes] = useState([]);
+
+
+
+
 
   // Add a note to notes array
   function addNote(note) {
@@ -23,15 +28,16 @@ function App() {
       // Update "notes" array
     setNotes(function (oldNotes) {
       // Using filter to return a new array where the requested note is removed based on his index.
-      return oldNotes.filter((_, index) => index !== id);
+      return oldNotes.filter((note) => note.id !== id);
     });
   }
 
   // Create a new Note components array from notes array.
   const listItems = notes.map((item, index) => (
+
     <Note
-      key={index}
-      id={index}
+      key={item.id}
+      id={item.id}
       title={item.title}
       content={item.content}
       date={item.date}

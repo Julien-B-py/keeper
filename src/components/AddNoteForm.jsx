@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { v4 as uuidv4 } from 'uuid';
 
 function AddNoteForm(props) {
   // State variable called "note" to store user inputs.
@@ -24,9 +25,10 @@ function AddNoteForm(props) {
       // Only update the value which has been updated by the user
       newNote[name] = value;
 
-      // Also add current date if not existing
+      // Also add current date and a unique id if not existing
       if (!newNote.date) {
         newNote.date = moment().format("DD/MM/YYYY");
+        newNote.id = uuidv4();
       }
 
       return newNote;
