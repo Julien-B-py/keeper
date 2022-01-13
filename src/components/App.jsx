@@ -42,10 +42,12 @@ function App() {
 
 // If notes array is not empty render all the notes else render default example note
   return (
-    <div>
+    <div className="app">
       <Header />
+      <div className="content">
       <AddNoteForm onAdd={addNote} />
       {notes.length ? (listItems.reverse()) : (<Note key={1} title="Note title" content="Note content" date="01/02/1993"/>)}
+      </div>
       <Footer />
     </div>
   );
