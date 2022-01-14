@@ -52,7 +52,9 @@ function App() {
       <Header />
       <div className="content">
       <AddNoteForm onAdd={addNote} />
+          <div className="notes">
       {notes.length ? (listItems.reverse()) : (<Note key={1} title="Note title" content="Note content" date="01/02/1993"/>)}
+            </div>
       </div>
       <Footer />
     </div>

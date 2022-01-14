@@ -3,7 +3,10 @@ import { gsap } from "gsap";
 
 
 function Note(props) {
+
+   // store a reference to the note div
   const noteRef = useRef();
+
   const tlCreation = useRef();
   const tlDeletion = useRef();
 
@@ -14,21 +17,35 @@ function Note(props) {
   // useLayoutEffect to avoiding flash of unstyled content
   useLayoutEffect(() => {
         tlCreation.current = gsap.timeline()
-        .from(noteRef.current,{width:0, padding:0, margin:0})
+        .from(noteRef.current,{height:0, width:0, padding:0, margin:0})
         .from(noteRef.current, { scale: 0 }, "-=0.15");
+
+        // cleanup function
+        return () => {
+          tlCreation.current.kill();
+        };
+
   }, []);
 
 
+  // useEffect : wait until DOM has been rendered
   // Animate note on deletion
-  // only runs when deleted value is changed
+  // only runs when deleted value is changed to true
     useEffect(() => {
+
       if (!deleted) return;
+
     tlDeletion.current = gsap.timeline({onComplete: ()=> props.onDelete(props.id)})
 .to(noteRef.current, {
     scale: 0,
     autoAlpha: 0,
     duration: 1
-  }).to(noteRef.current, {width:0, padding:0, margin:0}, "-=0.35")
+  }).to(noteRef.current, {height:0, width:0, padding:0, margin:0}, "-=0.35")
+
+  // cleanup function
+  return () => {
+    tlDeletion.current.kill();
+  };
 
         }, [deleted]);
 
