@@ -52,6 +52,7 @@ footer p {
   gap: 16px;
   justify-content: center;
   margin: auto;
+
 }
 
 .note {
@@ -64,6 +65,7 @@ footer p {
   width: 90%;
   /* margin: 16px; */
   align-self: flex-start;
+    overflow:hidden;
 }
 
 .note h1 {
