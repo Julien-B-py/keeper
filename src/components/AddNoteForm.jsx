@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function AddNoteForm(props) {
   // State variable called "note" to store user inputs.
@@ -13,8 +13,8 @@ function AddNoteForm(props) {
   // Everytime an input value is changed this function is called to update "note" state variable.
   function handleChange(event) {
     // Get the name and the value of the input that triggered the event
-    const name = event.target.name;
-    const value = event.target.value;
+    // Use object destructuring to access the properties name and value
+    const { name, value } = event.target;
 
     // Update "note" object
     setNote(function (oldValue) {
@@ -60,7 +60,7 @@ function AddNoteForm(props) {
               content: "",
               date: ""
             });
-            // Prevent form submit
+            // Prevent form submit/page refresh
             e.preventDefault();
           }}
         >

@@ -21,7 +21,7 @@ function Note(props) {
       .from(noteRef.current.firstChild, { y: "-150%", autoAlpha: 0 })
       .from(noteRef.current.children[1], { x: "-110%", autoAlpha: 0 }, "<")
       .from(noteRef.current.children[2], { y: "220%", autoAlpha: 0 }, "<")
-      .from(noteRef.current.lastChild, { scale: 0 });
+      .from(noteRef.current.children[3], { scale: 0 });
 
     // cleanup function
     return () => {
@@ -65,7 +65,7 @@ function Note(props) {
       <h1>{props.title}</h1>
       <p>{props.content}</p>
       <p className="note-date">{props.date}</p>
-      {deleteButton}
+      {props.deleteButton && deleteButton}
     </div>
   );
 }
