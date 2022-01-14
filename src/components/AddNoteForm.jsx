@@ -53,6 +53,9 @@ function AddNoteForm(props) {
         />
         <button
           onClick={(e) => {
+
+        if (note.title && note.content) {
+
             props.onAdd(note);
             // Reset note state variable so the user can add another note
             setNote({
@@ -60,6 +63,11 @@ function AddNoteForm(props) {
               content: "",
               date: ""
             });
+
+          } else {
+            const {title,content} = note;
+            title?alert("Please set a content"):alert("Please set a title");
+          }
             // Prevent form submit/page refresh
             e.preventDefault();
           }}

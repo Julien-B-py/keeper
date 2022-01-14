@@ -11,6 +11,7 @@ function App() {
 
   // Add a note to notes array
   function addNote(note) {
+    
     // Update "notes" array
     setNotes(function (oldNotes) {
       // Using spread operator to return a new array containing oldNotes and the new note
