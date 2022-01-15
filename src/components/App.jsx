@@ -11,7 +11,7 @@ function App() {
 
   // Add a note to notes array
   function addNote(note) {
-    
+
     // Update "notes" array
     setNotes(function (oldNotes) {
       // Using spread operator to return a new array containing oldNotes and the new note
@@ -47,19 +47,32 @@ function App() {
       <Header />
       <div className="content">
         <AddNoteForm onAdd={addNote} />
-        <div className="notes">
+
           {notes.length ? (
-            listItems.reverse()
+        <div className="notes">
+            <Note className="test"
+              key={1}
+              title="Example title"
+              content="Example content"
+              date="01/02/1993"
+              deleteButton={false}
+              hidden={true}
+            />
+            {listItems.reverse()}
+        </div>
           ) : (
+                  <div className="notes">
             <Note
               key={1}
               title="Example title"
               content="Example content"
               date="01/02/1993"
               deleteButton={false}
+                            hidden={false}
             />
+                    </div>
           )}
-        </div>
+
       </div>
       <Footer />
     </div>

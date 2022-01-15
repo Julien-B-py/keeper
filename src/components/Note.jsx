@@ -7,6 +7,8 @@ function Note(props) {
 
   const tlCreation = useRef();
   const tlDeletion = useRef();
+    const tlHide = useRef();
+
 
   const [deleted, setDeleted] = useState(false);
 
@@ -29,26 +31,75 @@ function Note(props) {
     };
   }, []);
 
+
+
   // useEffect : wait until DOM has been rendered
   // Animate note on deletion
   // only runs when deleted value is changed to true
   useEffect(() => {
-    if (!deleted) return;
 
-    tlDeletion.current = gsap
-      .timeline({ onComplete: () => props.onDelete(props.id) })
-      .to(noteRef.current, {
-        scale: 0,
-        autoAlpha: 0,
-        duration: 1
-      })
-      .to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
+    if (deleted) {
 
-    // cleanup function
-    return () => {
-      tlDeletion.current.kill();
-    };
+      tlDeletion.current = gsap
+        .timeline({ onComplete: () => props.onDelete(props.id) })
+        .to(noteRef.current, {
+          scale: 0,
+          autoAlpha: 0,
+          duration: 1
+        })
+        .to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
+
+      // cleanup function
+      return () => {
+        tlDeletion.current.kill();
+      };
+
+    }
+
   }, [deleted]);
+
+
+
+ // Animate example note disappearance/reappearance
+  useEffect(() => {
+
+    if (!props.deleteButton && props.hidden) {
+
+      tlHide.current = gsap
+        .timeline()
+        .to(noteRef.current, {
+          scale: 0,
+          autoAlpha: 0,
+          duration: 1
+        })
+        .to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
+
+      // cleanup function
+      return () => {
+        tlHide.current.kill();
+      };
+
+    } else if (!props.deleteButton && !props.hidden) {
+
+      tlHide.current = gsap
+        .timeline()
+        .set(noteRef.current, {clearProps:"height,width,padding,margin"})
+        .to(noteRef.current, {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 1
+        });
+
+    }
+
+  }, [props.hidden]);
+
+
+
+
+
+
+
 
   const deleteButton = (
     <button
