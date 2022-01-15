@@ -1,3 +1,12 @@
+# Keeper
+
+This project was about building my first **React app** to take and display user notes.
+
+Deployed and hosted version available here: [https://julien-b-py.github.io/keeper-deployed/](https://julien-b-py.github.io/keeper-deployed/)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
