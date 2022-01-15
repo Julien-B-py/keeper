@@ -2,7 +2,7 @@
 
 This project was about building my first **React app** to take and display user notes.
 
-Deployed and hosted version available here: [https://julien-b-py.github.io/keeper-deployed/](https://julien-b-py.github.io/keeper-deployed/)
+Deployed and hosted version available here: [https://julien-b-py.github.io/keeper](https://julien-b-py.github.io/keeper)
 
 
 
