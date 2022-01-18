@@ -10,8 +10,8 @@ function Note(props) {
 
   const [deleted, setDeleted] = useState(false);
 
-  // Animate notes on creation
-  // only runs when deleted value is changed
+  // Animate notes
+  // Only runs when deleted value is changed
   // useLayoutEffect to avoiding flash of unstyled content
   useLayoutEffect(() => {
 
@@ -26,12 +26,7 @@ if (!deleted) {
     .from(noteRef.current.children[2], { y: "220%", autoAlpha: 0 }, "<")
     .from(noteRef.current.children[3], { scale: 0 });
 
-}
-
-
-
-    // Before unmounting component
-    return () => {
+} else {
 
       tlDeletion.current = gsap
         .timeline({ onComplete: () => props.deleteButton && props.onDelete(props.id) })
@@ -41,9 +36,7 @@ if (!deleted) {
         }).to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
 
 
-
-    };
-  }, [deleted]);
+  }}, [deleted]);
 
 
 
@@ -52,31 +45,6 @@ if (!deleted) {
 
 
 
-
-
-
-
-//   useEffect(() => {
-//
-//     return () => {
-//
-// if(!props.deleteButton) {
-//
-// console.log("called")
-//
-//   tlDeletion.current = gsap
-//     .timeline()
-//     .to(noteRef.current, {
-//       scale: 0,
-//       autoAlpha: 0,
-//     }).to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
-// }
-//
-//
-//     };
-//
-//
-//   }, [props.deleteButton]);
 
 
 

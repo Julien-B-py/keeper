@@ -13,6 +13,8 @@ function App() {
   // Add a note to notes array
   function addNote(note) {
 
+
+
     // Update "notes" array
     setNotes(function (oldNotes) {
       // Using spread operator to return a new array containing oldNotes and the new note
@@ -23,12 +25,14 @@ function App() {
   // Remove a note from notes array by id
   function deleteNote(id) {
     // Update "notes" array
+
+
+
     setNotes(function (oldNotes) {
       // Using filter to return a new array where the requested note is removed based on his index.
       return oldNotes.filter((note) => note.id !== id);
     });
   }
-
 
 
 
@@ -54,7 +58,7 @@ function App() {
       <div className="content">
         <AddNoteForm onAdd={addNote} />
 
-          {notes.length  ? (
+          {notes.length ? (
         <div className="notes">
 
             {listItems.reverse()}
