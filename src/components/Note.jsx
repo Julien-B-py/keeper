@@ -7,95 +7,76 @@ function Note(props) {
 
   const tlCreation = useRef();
   const tlDeletion = useRef();
-    const tlHide = useRef();
-
 
   const [deleted, setDeleted] = useState(false);
 
-  // Animate note on creation
-  // only runs on first render
+  // Animate notes on creation
+  // only runs when deleted value is changed
   // useLayoutEffect to avoiding flash of unstyled content
   useLayoutEffect(() => {
-    tlCreation.current = gsap
-      .timeline()
-      .from(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 })
-      .from(noteRef.current, { scale: 0 }, "-=0.15")
-      .from(noteRef.current.firstChild, { y: "-150%", autoAlpha: 0 })
-      .from(noteRef.current.children[1], { x: "-110%", autoAlpha: 0 }, "<")
-      .from(noteRef.current.children[2], { y: "220%", autoAlpha: 0 }, "<")
-      .from(noteRef.current.children[3], { scale: 0 });
 
-    // cleanup function
+if (!deleted) {
+
+  tlCreation.current = gsap
+    .timeline()
+    .from(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 })
+    .from(noteRef.current, { scale: 0 }, "-=0.15")
+    .from(noteRef.current.firstChild, { y: "-150%", autoAlpha: 0 })
+    .from(noteRef.current.children[1], { x: "-110%", autoAlpha: 0 }, "<")
+    .from(noteRef.current.children[2], { y: "220%", autoAlpha: 0 }, "<")
+    .from(noteRef.current.children[3], { scale: 0 });
+
+}
+
+
+
+    // Before unmounting component
     return () => {
-      tlCreation.current.kill();
-    };
-  }, []);
-
-
-
-  // useEffect : wait until DOM has been rendered
-  // Animate note on deletion
-  // only runs when deleted value is changed to true
-  useEffect(() => {
-
-    if (deleted) {
 
       tlDeletion.current = gsap
-        .timeline({ onComplete: () => props.onDelete(props.id) })
+        .timeline({ onComplete: () => props.deleteButton && props.onDelete(props.id) })
         .to(noteRef.current, {
           scale: 0,
           autoAlpha: 0,
-          duration: 1
-        })
-        .to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
+        }).to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
 
-      // cleanup function
-      return () => {
-        tlDeletion.current.kill();
-      };
 
-    }
 
+    };
   }, [deleted]);
 
 
 
- // Animate example note disappearance/reappearance
-  useEffect(() => {
-
-    if (!props.deleteButton && props.hidden) {
-
-      tlHide.current = gsap
-        .timeline()
-        .to(noteRef.current, {
-          scale: 0,
-          autoAlpha: 0,
-          duration: 1
-        })
-        .to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
-
-      // cleanup function
-      return () => {
-        tlHide.current.kill();
-      };
-
-    } else if (!props.deleteButton && !props.hidden) {
-
-      tlHide.current = gsap
-        .timeline()
-        .set(noteRef.current, {clearProps:"height,width,padding,margin"})
-        .to(noteRef.current, {
-          scale: 1,
-          autoAlpha: 1,
-          duration: 1
-        });
-
-    }
-
-  }, [props.hidden]);
 
 
 
+
+
+
+
+
+
+//   useEffect(() => {
+//
+//     return () => {
+//
+// if(!props.deleteButton) {
+//
+// console.log("called")
+//
+//   tlDeletion.current = gsap
+//     .timeline()
+//     .to(noteRef.current, {
+//       scale: 0,
+//       autoAlpha: 0,
+//     }).to(noteRef.current, { height: 0, width: 0, padding: 0, margin: 0 });
+// }
+//
+//
+//     };
+//
+//
+//   }, [props.deleteButton]);
 
 
 

@@ -9,6 +9,7 @@ function App() {
   // State variable called "notes" to store all notes created by the user.
   const [notes, setNotes] = useState([]);
 
+
   // Add a note to notes array
   function addNote(note) {
 
@@ -27,6 +28,11 @@ function App() {
       return oldNotes.filter((note) => note.id !== id);
     });
   }
+
+
+
+
+
 
   // Create a new Note components array from notes array.
   const listItems = notes.map((item) => (
@@ -48,16 +54,9 @@ function App() {
       <div className="content">
         <AddNoteForm onAdd={addNote} />
 
-          {notes.length ? (
+          {notes.length  ? (
         <div className="notes">
-            <Note className="test"
-              key={1}
-              title="Example title"
-              content="Example content"
-              date="01/02/1993"
-              deleteButton={false}
-              hidden={true}
-            />
+
             {listItems.reverse()}
         </div>
           ) : (
@@ -68,7 +67,9 @@ function App() {
               content="Example content"
               date="01/02/1993"
               deleteButton={false}
-                            hidden={false}
+
+
+
             />
                     </div>
           )}
